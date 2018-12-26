@@ -1,5 +1,6 @@
 #include "display_ch.h"
-#define Font16 16
+//#define _ASC16_ 
+//#define _HZK16_ 
 DisplayCh::DisplayCh(){
   // Set default highlight color
   highlightcolor = RED;
@@ -160,15 +161,16 @@ void DisplayCh::setTextColor(uint16_t c, uint16_t b) {
 
 ***************************************************************************************/
 
-void DisplayCh::loadHzk16(const char *HZK16Path, const char *ASC16Path) {
+void DisplayCh::loadHzk16(Hzk16Types hzkTypes,const char *HZK16Path, const char *ASC16Path) {
 
   if (hzk16Used)
 
     return;
 
 
-
-#if defined(_ASC16_) && defined(_HZK16_)
+//Hzk16Types hzkTypes = InternalHzk16
+if(hzkTypes == InternalHzk16){
+//#if defined(_ASC16_) && defined(_HZK16_)
 
   pAscCharMatrix = (uint8_t *)&ASC16[0];
 
@@ -179,9 +181,9 @@ void DisplayCh::loadHzk16(const char *HZK16Path, const char *ASC16Path) {
   Serial.println("ASC16 path: Internal");
 
   hzk16Used = initHzk16(true, nullptr, nullptr);
-
-#else
-
+}
+else
+{
   pAscCharMatrix = NULL;
 
   pGbkCharMatrix = NULL;
@@ -197,8 +199,7 @@ void DisplayCh::loadHzk16(const char *HZK16Path, const char *ASC16Path) {
   Serial.println(ASC16Path);
 
   hzk16Used = initHzk16(true, HZK16Path, ASC16Path);
-
-#endif
+}
 
 
 

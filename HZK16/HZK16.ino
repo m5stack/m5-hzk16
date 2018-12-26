@@ -1,15 +1,22 @@
 #include <M5Stack.h>
 #include "display_ch.h"
 #include "str.h"
+
 DisplayCh displaych;
-#define USE_INTERNAL_HZK
 void setup() {
   
   M5.begin();
   
   // Use HZK16 and ASC16 font set
   // NOTE: font file should be copied to your TF card.
-  displaych.loadHzk16("/Fonts/HZK16","/Fonts/ASC16");
+#if 0
+  //Depending on SD card font 
+  displaych.loadHzk16(ExternalHzk16,"/Fonts/HZK16","/Fonts/ASC16");
+#else
+   //Dependence on internal fonts 
+  displaych.loadHzk16();
+#endif
+  //displaych.loadHzk16("/Fonts/HZK16","/Fonts/ASC16");
   // Set text with white foreground color and black background color
   displaych.setTextColor(WHITE, BLACK);
   

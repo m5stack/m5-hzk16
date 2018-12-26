@@ -1,6 +1,9 @@
 #ifndef __DISPLAY_CH_H_
 #define __DISPLAY_CH_H_
 #include <M5Stack.h>
+#include "./Fonts/HZK16.h"
+#include "./Fonts/ASC16.h"
+
 typedef enum
 {
   DontUsedHzk16,
@@ -16,7 +19,7 @@ public:
 ** GBK character support
 **
 **************************************************************************/
-  void loadHzk16(const char* HZK16Path = "/HZK16", const char* ASC16Path = "/ASC16");
+  void loadHzk16(Hzk16Types hzkTypes = InternalHzk16,const char* HZK16Path = "/HZK16", const char* ASC16Path = "/ASC16");
   void disableHzk16();
   
   void setTextColor(uint16_t c);
